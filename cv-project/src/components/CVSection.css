@@ -1,0 +1,23 @@
+.CV{
+    width: 100%;
+    background-color: rgb(218, 218, 218) ;
+    height: 100%;
+}
+
+#CVEditor{
+    width: 50%;
+    margin: auto;
+    align-items: center;
+    background-color: whitesmoke;
+}
+
+#CVPreview{
+    width: 50%;
+    margin: auto;
+    align-items: center;
+    background-color: whitesmoke;
+}
+
+#Personal{
+    display: flex;
+}
