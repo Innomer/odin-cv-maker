@@ -89,6 +89,12 @@ input {
     font-size: 30px;
     margin-top: 10px;
 }
+#prevHeader h4{
+    font-size: 20px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    text-align: right;
+}
 #prevExperience{
     height: fit-content;
     padding: 5%;
