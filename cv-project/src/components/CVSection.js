@@ -16,11 +16,19 @@ class CVSection extends Component {
             add: 'India',
             phone: '12345678',
             email: 'xyz@gmail.com',
+            eduCount: 1,
+            expCount: 1
         };
         this.enableExperience = this.enableExperience.bind(this);
         this.enableEducation = this.enableEducation.bind(this);
         this.enableProf = this.enableProf.bind(this);
         this.updateCV = this.updateCV.bind(this);
+        this.addEdu = this.addEdu.bind(this);
+        this.incEdu = this.incEdu.bind(this);
+        this.decEdu=this.decEdu.bind(this);
+        this.addExp=this.addExp.bind(this);
+        this.incExp=this.incExp.bind(this);
+        this.decExp=this.decExp.bind(this);
     }
 
     enableExperience() {
@@ -52,9 +60,71 @@ class CVSection extends Component {
         const formData = new FormData(event.currentTarget);
         for (let [keyss, value] of formData.entries()) {
             this.setState({
-                [keyss]:value
+                [keyss]: value
             })
         }
+    }
+
+    incEdu() {
+        this.setState((prevState) => ({
+            eduCount: prevState.eduCount + 1
+        }))
+    }
+
+    decEdu() {
+        if(this.state.eduCount>0)
+        this.setState((prevState) => ({
+            eduCount: prevState.eduCount - 1
+        }))
+    }
+
+    addEdu(count) {
+        const rows = [];
+        for (let i = 1; i <= count; i++) {
+            rows.push(<div>
+                <label htmlFor="uniName">University Name</label>
+                <input type='text' id='uniName' name='uniName' placeholder="University Name"></input>
+                <label htmlFor="uniCity">City</label>
+                <input type='text' id='uniCity' name='uniCity' placeholder="City"></input>
+                <label htmlFor="uniDegree">Degree</label>
+                <input type='text' id='uniDegree' name='uniDegree' placeholder="Degree"></input>
+                <label htmlFor="uniFrom">Start Year</label>
+                <input type='number' id='uniFrom' name='uniFrom' placeholder="Start Year"></input>
+                <label htmlFor="uniEnd">End Year</label>
+                <input type='number' id='uniEnd' name='uniEnd' placeholder="End Year"></input>
+            </div>);
+        }
+        return rows;
+    }
+    incExp() {
+        this.setState((prevState) => ({
+            expCount: prevState.expCount + 1
+        }))
+    }
+    decExp() {
+        if(this.state.expCount>0)
+        this.setState((prevState) => ({
+            expCount: prevState.expCount - 1
+        }))
+    }
+
+    addExp(count) {
+        const rows = [];
+        for (let i = 1; i <= count; i++) {
+            rows.push(<div>
+                <label htmlFor="compPos">Position</label>
+                <input type='text' id='compPos' name='compPos' placeholder="Position"></input>
+                <label htmlFor="compName">Company Name</label>
+                <input type='text' id='compName' name='compName' placeholder="Company Name"></input>
+                <label htmlFor="compCity">City</label>
+                <input type='text' id='compCity' name='compCity' placeholder="City"></input>
+                <label htmlFor="compFrom">Start Year</label>
+                <input type='number' id='compFrom' name='compFrom' placeholder="Start Year"></input>
+                <label htmlFor="compEnd">End Year</label>
+                <input type='text' id='compEnd' name='compEnd' placeholder="End Year"></input>
+            </div>);
+        }
+        return rows;
     }
 
     render() {
@@ -80,34 +150,16 @@ class CVSection extends Component {
                         </div>
                         <div id="Education" className={this.state.Education ? null : 'Dis'}>
                             <p id='formTitle'>Education</p>
-                            <label htmlFor="uniName">University Name</label>
-                            <input type='text' id='uniName' name='uniName' placeholder="University Name"></input>
-                            <label htmlFor="uniCity">City</label>
-                            <input type='text' id='uniCity' name='uniCity' placeholder="City"></input>
-                            <label htmlFor="uniDegree">Degree</label>
-                            <input type='text' id='uniDegree' name='uniDegree' placeholder="Degree"></input>
-                            <label htmlFor="uniFrom">Start Year</label>
-                            <input type='number' id='uniFrom' name='uniFrom' placeholder="Start Year"></input>
-                            <label htmlFor="uniEnd">End Year</label>
-                            <input type='number' id='uniEnd' name='uniEnd' placeholder="End Year"></input>
-                            <input type='button' id='addBut' value="Add"></input>
-                            <input type='button' id='delBut' value="Remove"></input>
+                            {this.addEdu(this.state.eduCount)}
+                            <input type='button' id='addBut' value="Add" onClick={this.incEdu}></input>
+                            <input type='button' id='delBut' value="Remove" onClick={this.decEdu}></input>
                             <input type='submit' id='submitBut' value="Submit"></input>
                         </div>
                         <div id="Experience" className={this.state.Experience ? null : 'Dis'}>
                             <p id='formTitle'>Experience</p>
-                            <label htmlFor="compPos">Position</label>
-                            <input type='text' id='compPos' name='compPos' placeholder="Position"></input>
-                            <label htmlFor="compName">Company Name</label>
-                            <input type='text' id='compName' name='compName' placeholder="Company Name"></input>
-                            <label htmlFor="compCity">City</label>
-                            <input type='text' id='compCity' name='compCity' placeholder="City"></input>
-                            <label htmlFor="compFrom">Start Year</label>
-                            <input type='number' id='compFrom' name='compFrom' placeholder="Start Year"></input>
-                            <label htmlFor="compEnd">End Year</label>
-                            <input type='text' id='compEnd' name='compEnd' placeholder="End Year"></input>
-                            <input type='button' id='addBut' value="Add"></input>
-                            <input type='button' id='delBut' value="Remove"></input>
+                            {this.addExp(this.state.expCount)}
+                            <input type='button' id='addBut' value="Add" onClick={this.incExp}></input>
+                            <input type='button' id='delBut' value="Remove" onClick={this.decExp}></input>
                             <input type='submit' id='submitBut' value="Submit"></input>
                         </div>
                     </form>
